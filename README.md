@@ -11,3 +11,5 @@ Requirements:
  - Rooms interconnected by hallways so none of them will be left alone.
  - Variable room size (small; 4x4 to 8x8, medium: 5x5 to 12x12, large: 6x6 to 16x16) and shape (square or rectangle)
  - Rooms must not be on the edge of the map.
+
+For the demo, go to https://silvereh.github.io/dungeon-generator/
