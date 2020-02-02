@@ -6,7 +6,38 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="author" content="Silvere Heraudeau">
 	<title>Dungeon Generator</title>
-	<link rel="stylesheet" href="css/style.css">
+	<!-- <link rel="stylesheet" href="css/style.css"> -->
+	<style>
+		.tile {
+			background-color: ghostwhite;
+			background-image: url('assets/sprites.png');
+			background-repeat: no-repeat;
+			background-attachment: scroll;
+			display: inline-block;
+			height: 25px;
+			width: 25px;
+		}
+
+		.map {
+			margin: 25px;
+		}
+
+		.outside .wall {
+			background-position: -100px -100px;
+		}
+
+		.inside .wall {
+			background-position: -25px -50px;
+		}
+
+		.outside .space {
+			background-position: -75px -25px;
+		}
+
+		.inside .space {
+			background-position: -175px 0px;
+		}
+	</style>
 </head>
 <body>
 	<h1>Dungeon Generator</h1>
