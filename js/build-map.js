@@ -4,20 +4,20 @@ function displayContents(contents) {
 
 	for (i = 0; i < contents.length; i ++) {
 		if (contents[i] === '0') {
-			let tile = document.createElement('span');
-			tile.setAttributeNode(wall);
-
 			let wall = document.createAttribute('class');
 			wall.value = 'tile wall';
+
+			let tile = document.createElement('span');
+			tile.setAttributeNode(wall);
 
 			map.appendChild(tile);
 		}
 		else if (contents[i] === '-') {
-			let tile = document.createElement('span');
-			tile.setAttributeNode(space);
-
 			let space = document.createAttribute('class');
 			space.value = 'tile space';
+
+			let tile = document.createElement('span');
+			tile.setAttributeNode(space);
 
 			map.appendChild(tile);
 		}
@@ -44,7 +44,7 @@ function loadFile(filename) {
 
 		// Examine the text in the response
 		response.text().then(data => {
-			console.log(data.length);
+			// console.log(data.length);
 			displayContents(data);
 		});
 	})
