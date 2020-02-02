@@ -9,9 +9,15 @@
 </head>
 <body>
 	<h1>Dungeon Generator</h1>
-	<div id="map"></div>
+	<div id="map">Map here</div>
+	<div>
+		<select name="map-size" id="map-size">
+			<option value="-s" selected>Small</option>
+			<option value="-m">Medium</option>
+			<option value="-l">Large</option>
+		</select>
+		<button id="generate-map">Generate map</button>
+	</div>
 	<script type="text/javascript" src="js/build-map.js"></script>
-	<script type="text/javascript">
-	</script>
 </body>
 </html>

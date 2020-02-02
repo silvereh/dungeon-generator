@@ -18,6 +18,7 @@ function loadFile(filename) {
 
 		// Examine the text in the response
 		response.text().then(data => {
+			console.log(data.length);
 			displayContents(data);
 		});
 	})
