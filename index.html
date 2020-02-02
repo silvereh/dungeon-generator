@@ -1,49 +1,17 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="author" content="Silvere Heraudeau">
-		<title>Dungeon Generator</title>
-	</head>
-	<body>
-		<div id="map"></div>
-		<!-- <script type="text/javascript" src="js/build-map.js"></script> -->
-		<script type="text/javascript">
-			function displayContents(contents) {
-				var element = document.getElementById('map');
-				element.textContent = contents;
-			}
-
-			function loadFile(filename) {
-				fetch(filename, {
-					method: 'GET',
-					headers: {
-						'Content-Type': 'text/plain'
-					}
-				})
-				.then(
-					function(response) {
-						if (response.status !== 200) {
-							console.log('Looks like there was a problem. Status Code: ' + response.status);
-							return;
-						}
-
-						// Examine the text in the response
-						response.text().then(function(data) {
-							displayContents(data);
-						});
-					}
-				)
-				.catch(function(err) {
-					console.log('Fetch Error :-S', err);
-				});
-			}
-
-			(function () {
-				loadFile('assets/map.txt');
-			})();
-		</script>
-	</body>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="Silvere Heraudeau">
+	<title>Dungeon Generator</title>
+</head>
+<body>
+	<h1>Dungeon Generator</h1>
+	<div id="map"></div>
+	<script type="text/javascript" src="js/build-map.js"></script>
+	<script type="text/javascript">
+	</script>
+</body>
 </html>

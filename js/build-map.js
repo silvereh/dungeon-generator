@@ -1,24 +1,31 @@
-async function displayContents() {
-  var element = document.getElementById('map');
-  const contents = await loadFile("./assets/map.txt");
-  element.textContent = contents;
+function displayContents(contents) {
+	var element = document.getElementById('map');
+	element.textContent = contents;
 }
 
 function loadFile(filename) {
-  return new Promise(resolve => {
-    var txt = '';
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-      if(xmlhttp.status == 200 && xmlhttp.readyState == 4) {
-        txt = xmlhttp.responseText;
-      }
-    };
-    xmlhttp.open("GET", filename, true);
-    xmlhttp.send();
-    resolve(txt);
-  });
+	fetch(filename, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'text/plain'
+		}
+	})
+	.then(response => {
+		if (response.status !== 200) {
+			console.log('Looks like there was a problem. Status Code: ' + response.status);
+			return;
+		}
+
+		// Examine the text in the response
+		response.text().then(data => {
+			displayContents(data);
+		});
+	})
+	.catch(err => {
+		console.log('Fetch Error :-S', err);
+	});
 }
 
 (function () {
-  displayContents();
+	loadFile('assets/map.txt');
 })();
