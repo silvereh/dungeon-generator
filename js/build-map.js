@@ -2,22 +2,22 @@ function displayContents(contents) {
 	let map = document.getElementById('map');
 	map.innerHTML = '';
 
-	let wall = document.createAttribute('class');
-	wall.value = 'tile wall';
-
-	let space = document.createAttribute('class');
-	space.value = 'tile space';
-
 	for (i = 0; i < contents.length; i ++) {
 		if (contents[i] === '0') {
 			let tile = document.createElement('span');
 			tile.setAttributeNode(wall);
+
+			let wall = document.createAttribute('class');
+			wall.value = 'tile wall';
 
 			map.appendChild(tile);
 		}
 		else if (contents[i] === '-') {
 			let tile = document.createElement('span');
 			tile.setAttributeNode(space);
+
+			let space = document.createAttribute('class');
+			space.value = 'tile space';
 
 			map.appendChild(tile);
 		}
