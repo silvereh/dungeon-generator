@@ -1,0 +1,29 @@
+.tile {
+	background-color: ghostwhite;
+	background-image: url('../assets/sprites.png');
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	display: inline-block;
+	height: 25px;
+	width: 25px;
+}
+
+.map {
+	margin: 25px;
+}
+
+.outside .wall {
+	background-position: -100px -100px;
+}
+
+.inside .wall {
+	background-position: -25px -50px;
+}
+
+.outside .space {
+	background-position: -75px -25px;
+}
+
+.inside .space {
+	background-position: -175px 0px;
+}
