@@ -49,10 +49,11 @@
 		<span class="tile wall"></span>
 		<span class="tile space"></span>
 	</div>
-	<!-- <script type="text/javascript" src="js/build-map.js"></script> -->
+	<script type="text/javascript" src="js/build-map.js"></script>
 	<script type="text/javascript">
 		document.getElementById('env').addEventListener('change', e => {
-			let env = 'map ' + e.target.value;
+			let env = 'map ' 
+			+ e.target.value;
 			let map = document.getElementById('map');
 			map.className = env;
 		});
