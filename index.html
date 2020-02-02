@@ -6,18 +6,25 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="author" content="Silvere Heraudeau">
 	<title>Dungeon Generator</title>
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<h1>Dungeon Generator</h1>
-	<div id="map">Map here</div>
-	<div>
-		<select name="map-size" id="map-size">
-			<option value="-s" selected>Small</option>
-			<option value="-m">Medium</option>
-			<option value="-l">Large</option>
-		</select>
-		<button id="generate-map">Generate map</button>
+	<select name="env" id="env">
+		<option value="outside">Outside</option>
+		<option value="inside">Inside</option>
+	</select>
+	<div id="map" class="map outside">
+		<span class="tile wall"></span>
+		<span class="tile space"></span>
 	</div>
-	<script type="text/javascript" src="js/build-map.js"></script>
+	<!-- <script type="text/javascript" src="js/build-map.js"></script> -->
+	<script type="text/javascript">
+		document.getElementById('env').addEventListener('change', e => {
+			let env = e.target.value;
+			let map = document.getElementById('map');
+			map.className = env;
+		});
+	</script>
 </body>
 </html>

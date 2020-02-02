@@ -1,6 +1,32 @@
 function displayContents(contents) {
-	var element = document.getElementById('map');
-	element.textContent = contents;
+	let map = document.getElementById('map');
+	map.innerHTML = '';
+
+	let wall = document.createAttribute('class');
+	wall.value = 'tile wall';
+
+	let space = document.createAttribute('class');
+	space.value = 'tile space';
+
+	for (i = 0; i < contents.length; i ++) {
+		if (contents[i] === '0') {
+			let tile = document.createElement('span');
+			tile.setAttributeNode(wall);
+
+			map.appendChild(tile);
+		}
+		else if (contents[i] === '-') {
+			let tile = document.createElement('span');
+			tile.setAttributeNode(space);
+
+			map.appendChild(tile);
+		}
+		else {
+			let lineBreak = document.createElement('br');
+
+			map.appendChild(lineBreak);
+		}
+	}
 }
 
 function loadFile(filename) {
