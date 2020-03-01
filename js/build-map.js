@@ -146,7 +146,7 @@ const populateMap = (contents) => {
 	}
 
 	// place other interactive elements.
-	while ((! playerPlaced) && (! bossPlaced) && (! questsPlaced) && (! goalsPlaced) && (! chestsPlaced)) {
+	while ((! playerPlaced) && (! bossPlaced) && (questsPlaced == 0) && (goalsPlaced == 0) && (chestsPlaced == 0)) {
 		for (i = 0; i < output.length; i ++) {
 			if (output[i] === TILE.CHAR.SPACE) {
 				let val = Math.floor(Math.random() * 20);
