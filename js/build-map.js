@@ -166,30 +166,55 @@ const populateMap = (contents) => {
 		for (i = 0; i < output.length; i ++) {
 			if (output[i] === TILE.CHAR.SPACE) {
 				let val = Math.floor(Math.random() * 20);
-				if (val < 1 && ! playerPlaced) {
-					console.log('Placing player spawning point ...');
-					buff += TILE.CHAR.PLAYER;
-					playerPlaced = true;
+				if (val < 1) {
+					if (! playerPlaced) {
+						console.log('Placing player spawning point ...');
+						buff += TILE.CHAR.PLAYER;
+						playerPlaced = true;
+					}
+					else {
+						buff += output[i];
+					}
 				}
-				else if (val < 2 && ! bossPlaced) {
-					console.log('Placing boss ...');
-					buff += TILE.CHAR.BOSS;
-					bossPlaced = true;
+				else if (val < 2) {
+					if (! bossPlaced) {
+						console.log('Placing boss ...');
+						buff += TILE.CHAR.BOSS;
+						bossPlaced = true;
+					}
+					else {
+						buff += output[i];
+					}
 				}
-				else if (val < 4 && questsPlaced < 3) {
-					console.log('Placing quest ...');
-					buff += TILE.CHAR.QUEST;
-					questsPlaced ++;
+				else if (val < 4) {
+					if (questsPlaced < 3) {
+						console.log('Placing quest ...');
+						buff += TILE.CHAR.QUEST;
+						questsPlaced ++;
+					}
+					else {
+						buff += output[i];
+					}
 				}
-				else if (val < 6 && goalsPlaced < questsPlaced) {
-					console.log('Placing goal ...');
-					buff += TILE.CHAR.GOAL;
-					goalsPlaced ++;
+				else if (val < 6) {
+					if (goalsPlaced < questsPlaced) {
+						console.log('Placing goal ...');
+						buff += TILE.CHAR.GOAL;
+						goalsPlaced ++;
+					}
+					else {
+						buff += output[i];
+					}
 				}
-				else if (val < 9 && chestsPlaced < 10) {
-					console.log('Placing treasure chest ...');
-					buff += TILE.CHAR.CHEST;
-					chestsPlaced ++;
+				else if (val < 9) {
+					if (chestsPlaced < 10) {
+						console.log('Placing treasure chest ...');
+						buff += TILE.CHAR.CHEST;
+						chestsPlaced ++;
+					}
+					else {
+						buff += output[i];
+					}
 				}
 				else {
 					buff += output[i];
