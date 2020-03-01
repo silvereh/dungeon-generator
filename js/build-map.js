@@ -37,7 +37,7 @@ const displayContents = (contents) => {
 		if (contents[i] == TILE.CHAR.WALL) {
 			tileClass.value = 'tile ' + TILE.CLASS.WALL;
 		}
-		else if (contents[i] == TILE.CHAR.SPACE || contents[i] == TILE.CHAR.PLAYER || contents[i] == TILE.CHAR.MOB || contents[i] == TILE.CHAR.BOSS || contents[i] == TILE.CHAR.CHEST || contents[i] == TILE.CHAR.QUEST) {
+		else if (contents[i] == TILE.CHAR.SPACE || contents[i] == TILE.CHAR.PLAYER || contents[i] == TILE.CHAR.MOB || contents[i] == TILE.CHAR.BOSS || contents[i] == TILE.CHAR.CHEST || contents[i] == TILE.CHAR.QUEST || contents[i] == TILE.CHAR.GOAL) {
 			tileClass.value = 'tile ' + TILE.CLASS.SPACE;
 			switch (contents[i]) {
 				case TILE.CHAR.PLAYER:
@@ -62,6 +62,11 @@ const displayContents = (contents) => {
 					break;
 				case TILE.CHAR.QUEST:
 					interactiveElmtClass.value = 'tile ' + TILE.CLASS.QUEST;
+					interactiveElmt.setAttributeNode(interactiveElmtClass);
+					tile.appendChild(interactiveElmt);
+					break;
+				case TILE.CHAR.GOAL:
+					interactiveElmtClass.value = 'tile ' + TILE.CLASS.GOAL;
 					interactiveElmt.setAttributeNode(interactiveElmtClass);
 					tile.appendChild(interactiveElmt);
 					break;
