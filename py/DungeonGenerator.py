@@ -121,13 +121,13 @@ class Map(object):
 				for i in xrange(h.pointA.y - 1, h.pointB.y + 1):
 					idx = (i * self.width) + h.pointA.x
 					# self._map[idx] = chr(ord('A')+l)
-					# self._map[idx] = '·'
-					self._map[idx] = '-'
+					self._map[idx] = '·'
+					# self._map[idx] = '-'
 			else:
 				for i in xrange(h.pointA.x - 1, h.pointB.x + 1):
 					# self._map[i + (h.pointA.y * self.width)] = chr(ord('A')+l)
-					# self._map[i + (h.pointA.y * self.width)] = '·'
-					self._map[i + (h.pointA.y * self.width)] = '-'
+					self._map[i + (h.pointA.y * self.width)] = '·'
+					# self._map[i + (h.pointA.y * self.width)] = '-'
 
 	def isRoomIntersectingAnotherRoom(self, index):
 		roomNum = len(self.rooms)
