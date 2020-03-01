@@ -36,38 +36,38 @@ const displayContents = (contents) => {
 		let interactiveElmtClass = document.createAttribute('class');
 		switch (contents[i]) {
 			case TILE.CHAR.WALL:
-				tileClass.value = TILE.CLASS.WALL.prepend('tile ');
+				tileClass.value = 'tile ' + TILE.CLASS.WALL;
 				break;
 			case TILE.CHAR.SPACE:
-				tileClass.value = TILE.CLASS.SPACE.prepend('tile ');
+				tileClass.value = 'tile ' + TILE.CLASS.SPACE;
 				break;
 			case TILE.CHAR.PLAYER:
-				tileClass.value = TILE.CLASS.SPACE.prepend('tile ');
-				interactiveElmtClass.value = TILE.CLASS.PLAYER.prepend('tile ');
+				tileClass.value = 'tile ' + TILE.CLASS.SPACE;
+				interactiveElmtClass.value = 'tile ' + TILE.CLASS.PLAYER;
 				interactiveElmt.setAttribute(interactiveElmtClass);
 				tile.appendChild(interactiveElmt);
 				break;
 			case TILE.CHAR.MOB:
-				tileClass.value = TILE.CLASS.SPACE.prepend('tile ');
-				interactiveElmtClass.value = TILE.CLASS.MOB.prepend('tile ');
+				tileClass.value = 'tile ' + TILE.CLASS.SPACE;
+				interactiveElmtClass.value = 'tile ' + TILE.CLASS.MOB;
 				interactiveElmt.setAttribute(interactiveElmtClass);
 				tile.appendChild(interactiveElmt);
 				break;
 			case TILE.CHAR.BOSS:
-				tileClass.value = TILE.CLASS.SPACE.prepend('tile ');
-				interactiveElmtClass.value = TILE.CLASS.BOSS.prepend('tile ');
+				tileClass.value = 'tile ' + TILE.CLASS.SPACE;
+				interactiveElmtClass.value = 'tile ' + TILE.CLASS.BOSS;
 				interactiveElmt.setAttribute(interactiveElmtClass);
 				tile.appendChild(interactiveElmt);
 				break;
 			case TILE.CHAR.CHEST:
-				tileClass.value = TILE.CLASS.SPACE.prepend('tile ');
-				interactiveElmtClass.value = TILE.CLASS.CHEST.prepend('tile ');
+				tileClass.value = 'tile ' + TILE.CLASS.SPACE;
+				interactiveElmtClass.value = 'tile ' + TILE.CLASS.CHEST;
 				interactiveElmt.setAttribute(interactiveElmtClass);
 				tile.appendChild(interactiveElmt);
 				break;
 			case TILE.CHAR.QUEST:
-				tileClass.value = TILE.CLASS.SPACE.prepend('tile ');
-				interactiveElmtClass.value = TILE.CLASS.QUEST.prepend('tile ');
+				tileClass.value = 'tile ' + TILE.CLASS.SPACE;
+				interactiveElmtClass.value = 'tile ' + TILE.CLASS.QUEST;
 				interactiveElmt.setAttribute(interactiveElmtClass);
 				tile.appendChild(interactiveElmt);
 				break;
