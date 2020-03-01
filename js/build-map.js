@@ -100,10 +100,7 @@ const loadFile = (filename) => {
 		// Examine the text in the response
 		response.text()
 			.then((data) => {
-				populateMap(data);
-			})
-			.then((data) => {
-				displayContents(data);
+				displayContents(populateMap(data));
 			});
 	})
 	.catch((err) => {
