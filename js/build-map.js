@@ -190,6 +190,7 @@ const populateMap = (contents) => {
 		}
 	}
 
+	console.log(contents);
 	return contents;
 }
 
