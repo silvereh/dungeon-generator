@@ -116,6 +116,7 @@ const loadFile = (filename) => {
  * Param: contents - The content of the map, as a string.
  */
 const populateMap = (contents) => {
+	let output = contents;
 	let availableSpaces = 0,
 			mobsPlaced      = 0,
 			chestsPlaced    = 0,
@@ -125,8 +126,8 @@ const populateMap = (contents) => {
 			playerPlaced    = false,
 
 	// count available spaces.
-	for (i = 0; i < contents.length; i ++) {
-		if (contents[i] === TILE.CHAR.SPACE) {
+	for (i = 0; i < output.length; i ++) {
+		if (output[i] === TILE.CHAR.SPACE) {
 			availableSpaces ++;
 		}
 	}
@@ -136,9 +137,9 @@ const populateMap = (contents) => {
 
 	// place random encounters.
 	while (mobsPlaced < mobMin) {
-		for (i = 0; i < contents.length; i ++) {
+		for (i = 0; i < output.length; i ++) {
 			if (mobsPlaced < mobMax) {
-				contents[i] = TILE.CHAR.MOB;
+				output[i] = TILE.CHAR.MOB;
 				mobsPlaced ++;
 			}
 		}
@@ -146,33 +147,33 @@ const populateMap = (contents) => {
 
 	// place other interactive elements.
 	while ((! playerPlaced) && (! bossPlaced) && (! questsPlaced) && (! goalsPlaced) && (! chestsPlaced)) {
-		for (i = 0; i < contents.length; i ++) {
-			if (contents[i] === TILE.CHAR.SPACE) {
+		for (i = 0; i < output.length; i ++) {
+			if (output[i] === TILE.CHAR.SPACE) {
 				let val = Math.floor(Math.random() * 20);
 				switch (val) {
 					case 0:
 						if (! playerPlaced) {
-							contents[i] = TILE.CHAR.PLAYER;
+							output[i] = TILE.CHAR.PLAYER;
 							playerPlaced = true;
 						}
 						break;
 					case 1:
 						if (! bossPlaced) {
-							contents[i] = TILE.CHAR.BOSS;
+							output[i] = TILE.CHAR.BOSS;
 							bossPlaced = true;
 						}
 						break;
 					case 2:
 					case 3:
 						if (questsPlaced < 3) {
-							contents[i] = TILE.CHAR.QUEST;
+							output[i] = TILE.CHAR.QUEST;
 							questsPlaced ++;
 						}
 						break;
 					case 4:
 					case 5:
 						if (goalsPlaced < (questsPlaced + 1)) {
-							contents[i] = TILE.CHAR.GOAL;
+							output[i] = TILE.CHAR.GOAL;
 							goalsPlaced ++;
 						}
 						break;
@@ -180,7 +181,7 @@ const populateMap = (contents) => {
 					case 7:
 					case 8:
 						if (chestsPlaced < 5) {
-							contents[i] = TILE.CHAR.CHEST;
+							output[i] = TILE.CHAR.CHEST;
 							chestsPlaced ++;
 						}
 						break;
@@ -190,8 +191,8 @@ const populateMap = (contents) => {
 		}
 	}
 
-	console.log(contents);
-	return contents;
+	console.log(output);
+	return output;
 }
 
 (() => {
