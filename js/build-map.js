@@ -34,47 +34,44 @@ const displayContents = (contents) => {
 		let tileClass = document.createAttribute('class');
 		let interactiveElmt = document.createElement('span');
 		let interactiveElmtClass = document.createAttribute('class');
-		switch (contents[i]) {
-			case TILE.CHAR.WALL:
-				tileClass.value = 'tile ' + TILE.CLASS.WALL;
-				break;
-			case TILE.CHAR.SPACE:
-				tileClass.value = 'tile ' + TILE.CLASS.SPACE;
-				break;
-			case TILE.CHAR.PLAYER:
-				tileClass.value = 'tile ' + TILE.CLASS.SPACE;
-				interactiveElmtClass.value = 'tile ' + TILE.CLASS.PLAYER;
-				interactiveElmt.setAttributeNode(interactiveElmtClass);
-				tile.appendChild(interactiveElmt);
-				break;
-			case TILE.CHAR.MOB:
-				tileClass.value = 'tile ' + TILE.CLASS.SPACE;
-				interactiveElmtClass.value = 'tile ' + TILE.CLASS.MOB;
-				interactiveElmt.setAttributeNode(interactiveElmtClass);
-				tile.appendChild(interactiveElmt);
-				break;
-			case TILE.CHAR.BOSS:
-				tileClass.value = 'tile ' + TILE.CLASS.SPACE;
-				interactiveElmtClass.value = 'tile ' + TILE.CLASS.BOSS;
-				interactiveElmt.setAttributeNode(interactiveElmtClass);
-				tile.appendChild(interactiveElmt);
-				break;
-			case TILE.CHAR.CHEST:
-				tileClass.value = 'tile ' + TILE.CLASS.SPACE;
-				interactiveElmtClass.value = 'tile ' + TILE.CLASS.CHEST;
-				interactiveElmt.setAttributeNode(interactiveElmtClass);
-				tile.appendChild(interactiveElmt);
-				break;
-			case TILE.CHAR.QUEST:
-				tileClass.value = 'tile ' + TILE.CLASS.SPACE;
-				interactiveElmtClass.value = 'tile ' + TILE.CLASS.QUEST;
-				interactiveElmt.setAttributeNode(interactiveElmtClass);
-				tile.appendChild(interactiveElmt);
-				break;
-			default:
-				let lineBreak = document.createElement('br');
-				map.appendChild(lineBreak);
-				continue;
+		if (contents[i] == TILE.CHAR.WALL) {
+			tileClass.value = 'tile ' + TILE.CLASS.WALL;
+		}
+		else {
+			tileClass.value = 'tile ' + TILE.CLASS.SPACE;
+			switch (contents[i]) {
+				case TILE.CHAR.SPACE:
+					break;
+				case TILE.CHAR.PLAYER:
+					interactiveElmtClass.value = 'tile ' + TILE.CLASS.PLAYER;
+					interactiveElmt.setAttributeNode(interactiveElmtClass);
+					tile.appendChild(interactiveElmt);
+					break;
+				case TILE.CHAR.MOB:
+					interactiveElmtClass.value = 'tile ' + TILE.CLASS.MOB;
+					interactiveElmt.setAttributeNode(interactiveElmtClass);
+					tile.appendChild(interactiveElmt);
+					break;
+				case TILE.CHAR.BOSS:
+					interactiveElmtClass.value = 'tile ' + TILE.CLASS.BOSS;
+					interactiveElmt.setAttributeNode(interactiveElmtClass);
+					tile.appendChild(interactiveElmt);
+					break;
+				case TILE.CHAR.CHEST:
+					interactiveElmtClass.value = 'tile ' + TILE.CLASS.CHEST;
+					interactiveElmt.setAttributeNode(interactiveElmtClass);
+					tile.appendChild(interactiveElmt);
+					break;
+				case TILE.CHAR.QUEST:
+					interactiveElmtClass.value = 'tile ' + TILE.CLASS.QUEST;
+					interactiveElmt.setAttributeNode(interactiveElmtClass);
+					tile.appendChild(interactiveElmt);
+					break;
+				default:
+					let lineBreak = document.createElement('br');
+					map.appendChild(lineBreak);
+					continue;
+			}
 		}
 		tile.setAttributeNode(tileClass);
 		map.appendChild(tile);
