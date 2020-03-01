@@ -222,9 +222,12 @@ const populateMap = (contents) => {
 				buf2 += buf1[i];
 			}
 		}
+		buf1 = buf2;
+		buf2 = '';
 	}
 	console.log('Interactive Elements placed.')
 
+	output = buf1;
 	console.log(output);
 	return output;
 }
