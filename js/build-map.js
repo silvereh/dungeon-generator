@@ -123,7 +123,7 @@ const populateMap = (contents) => {
 			questsPlaced    = 0,
 			goalsPlaced     = 0,
 			bossPlaced      = false,
-			playerPlaced    = false,
+			playerPlaced    = false;
 
 	// count available spaces.
 	for (i = 0; i < output.length; i ++) {
