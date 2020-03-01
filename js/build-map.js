@@ -158,8 +158,10 @@ const populateMap = (contents) => {
 		buff = '';
 	}
 
+	console.log('Temporary output: ', output);
+
 	// place other interactive elements.
-	while ((! playerPlaced) || (! bossPlaced) || (questsPlaced < 1) || (goalsPlaced < questsPlaced) || (chestsPlaced < 1)) {
+	while (! (playerPlaced && bossPlaced) || questsPlaced < 1 || goalsPlaced < questsPlaced || chestsPlaced < 1) {
 		console.log('Placing interactive elements ...');
 		for (i = 0; i < output.length; i ++) {
 			if (output[i] === TILE.CHAR.SPACE) {
@@ -203,7 +205,7 @@ const populateMap = (contents) => {
 	}
 
 	output = output;
-	console.log(output);
+	console.log('Final output: ', output);
 	return output;
 }
 
