@@ -158,7 +158,7 @@ const populateMap = (contents) => {
 		buff = '';
 	}
 
-	console.log('Temporary output: ', output);
+	console.log('Temporary output:\n', output);
 
 	// place other interactive elements.
 	while (! (playerPlaced && bossPlaced) || questsPlaced < 1 || goalsPlaced < questsPlaced || chestsPlaced < 1) {
@@ -205,7 +205,7 @@ const populateMap = (contents) => {
 	}
 
 	output = output;
-	console.log('Final output: ', output);
+	console.log('Final output:\n', output);
 	return output;
 }
 
