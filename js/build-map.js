@@ -117,13 +117,13 @@ const loadFile = (filename) => {
  */
 const populateMap = (contents) => {
 	let output = contents;
-	let availableSpaces = 0,
-			mobsPlaced      = 0,
-			chestsPlaced    = 0,
-			questsPlaced    = 0,
-			goalsPlaced     = 0,
-			bossPlaced      = false,
-			playerPlaced    = false;
+	let availableSpaces = 0;
+	let mobsPlaced      = 0;
+	let chestsPlaced    = 0;
+	let questsPlaced    = 0;
+	let goalsPlaced     = 0;
+	let bossPlaced      = false;
+	let playerPlaced    = false;
 
 	// count available spaces.
 	for (i = 0; i < output.length; i ++) {
@@ -146,7 +146,7 @@ const populateMap = (contents) => {
 	}
 
 	// place other interactive elements.
-	while ((! playerPlaced) && (! bossPlaced) && (questsPlaced == 0) && (goalsPlaced == 0) && (chestsPlaced == 0)) {
+	while ((! playerPlaced) && (! bossPlaced) && (questsPlaced == 0) && (goalsPlaced < questsPlaced) && (chestsPlaced == 0)) {
 		for (i = 0; i < output.length; i ++) {
 			if (output[i] === TILE.CHAR.SPACE) {
 				let val = Math.floor(Math.random() * 20);
@@ -172,7 +172,7 @@ const populateMap = (contents) => {
 						break;
 					case 4:
 					case 5:
-						if (goalsPlaced < (questsPlaced + 1)) {
+						if (goalsPlaced < questsPlaced) {
 							output[i] = TILE.CHAR.GOAL;
 							goalsPlaced ++;
 						}
