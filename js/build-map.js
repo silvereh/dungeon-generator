@@ -37,9 +37,11 @@ const displayContents = (contents) => {
 		if (contents[i] == TILE.CHAR.WALL) {
 			tileClass.value = 'tile ' + TILE.CLASS.WALL;
 		}
-		else if (contents[i] == TILE.CHAR.SPACE || contents[i] == TILE.CHAR.PLAYER || contents[i] == TILE.CHAR.MOB || contents[i] == TILE.CHAR.BOSS || contents[i] == TILE.CHAR.CHEST || contents[i] == TILE.CHAR.QUEST || contents[i] == TILE.CHAR.GOAL) {
+		else {
 			tileClass.value = 'tile ' + TILE.CLASS.SPACE;
 			switch (contents[i]) {
+				case TILE.CHAR.SPACE:
+					break;
 				case TILE.CHAR.PLAYER:
 					interactiveElmtClass.value = 'tile ' + TILE.CLASS.PLAYER;
 					interactiveElmt.setAttributeNode(interactiveElmtClass);
@@ -71,11 +73,10 @@ const displayContents = (contents) => {
 					tile.appendChild(interactiveElmt);
 					break;
 				default:
+					let lineBreak = document.createElement('br');
+					map.appendChild(lineBreak);
+					continue;
 			}
-		}
-		else {
-			let lineBreak = document.createElement('br');
-			map.appendChild(lineBreak);
 		}
 		tile.setAttributeNode(tileClass);
 		map.appendChild(tile);
