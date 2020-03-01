@@ -163,63 +163,33 @@ const populateMap = (contents) => {
 		for (i = 0; i < output.length; i ++) {
 			if (output[i] === TILE.CHAR.SPACE) {
 				let val = Math.floor(Math.random() * 20);
-				switch (val) {
-					case 0:
-						if (! playerPlaced) {
-							console.log('Placing player spawning point ...');
-							buff += TILE.CHAR.PLAYER;
-							playerPlaced = true;
-						}
-						else {
-							buff += output[i];
-						}
-						break;
-					case 1:
-						if (! bossPlaced) {
-							console.log('Placing boss ...');
-							buff += TILE.CHAR.BOSS;
-							bossPlaced = true;
-						}
-						else {
-							buff += output[i];
-						}
-						break;
-					case 2:
-					case 3:
-						if (questsPlaced < 3) {
-							console.log('Placing quest ...');
-							buff += TILE.CHAR.QUEST;
-							questsPlaced ++;
-						}
-						else {
-							buff += output[i];
-						}
-						break;
-					case 4:
-					case 5:
-						if (goalsPlaced < questsPlaced) {
-							console.log('Placing goal ...');
-							buff += TILE.CHAR.GOAL;
-							goalsPlaced ++;
-						}
-						else {
-							buff += output[i];
-						}
-						break;
-					case 6:
-					case 7:
-					case 8:
-						if (chestsPlaced < 5) {
-							console.log('Placing treasure chest ...');
-							buff += TILE.CHAR.CHEST;
-							chestsPlaced ++;
-						}
-						else {
-							buff += output[i];
-						}
-						break;
-					default:
-						buff += output[i];
+				if (val == 0 && ! playerPlaced) {
+					console.log('Placing player spawning point ...');
+					buff += TILE.CHAR.PLAYER;
+					playerPlaced = true;
+				}
+				else if (val == 1 && ! bossPlaced) {
+					console.log('Placing boss ...');
+					buff += TILE.CHAR.BOSS;
+					bossPlaced = true;
+				}
+				else if ((val == 2 || val == 3) && questsPlaced < 3) {
+					console.log('Placing quest ...');
+					buff += TILE.CHAR.QUEST;
+					questsPlaced ++;
+				}
+				else if ((val == 4 || val == 5) && goalsPlaced < questsPlaced) {
+					console.log('Placing goal ...');
+					buff += TILE.CHAR.GOAL;
+					goalsPlaced ++;
+				}
+				else if ((val == 6 || val == 7 || val == 8) && chestsPlaced < 10) {
+					console.log('Placing treasure chest ...');
+					buff += TILE.CHAR.CHEST;
+					chestsPlaced ++;
+				}
+				else {
+					buff += output[i];
 				}
 			}
 			else {
