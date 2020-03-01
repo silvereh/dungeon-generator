@@ -115,8 +115,7 @@ const loadFile = (filename) => {
  */
 const populateMap = (contents) => {
 	let output = '';
-	let buf1 = '';
-	let buf2 = '';
+	let buff = '';
 	let availableSpaces = 0;
 	let mobsPlaced      = 0;
 	let chestsPlaced    = 0;
@@ -130,7 +129,7 @@ const populateMap = (contents) => {
 		if (contents[i] === TILE.CHAR.SPACE) {
 			availableSpaces ++;
 		}
-		buf1 += contents[i];
+		output += contents[i];
 	}
 	console.log('Available Slots: ', availableSpaces);
 
@@ -139,95 +138,100 @@ const populateMap = (contents) => {
 
 	// place random encounters.
 	while (mobsPlaced < mobMin) {
-		for (i = 0; i < buf1.length; i ++) {
-			if (buf1[i] === TILE.CHAR.SPACE && mobsPlaced < mobMax) {
+		for (i = 0; i < output.length; i ++) {
+			if (output[i] === TILE.CHAR.SPACE && mobsPlaced < mobMax) {
 				let val = Math.floor(Math.random() * 4);
 				if (val == 0) {
-					buf2 += TILE.CHAR.MOB;
+					buff += TILE.CHAR.MOB;
 					mobsPlaced ++;
 				}
 				else {
-					buf2 += buf1[i];
+					buff += output[i];
 				}
 			}
 			else {
-				buf2 += buf1[i];
+				buff += output[i];
 			}
 		}
 		console.log('Mobs placed: ', mobsPlaced);
-		buf1 = buf2;
-		buf2 = '';
+		output = buff;
+		buff = '';
 	}
 
 	// place other interactive elements.
 	while ((! playerPlaced) && (! bossPlaced) && (questsPlaced == 0) && (goalsPlaced < questsPlaced) && (chestsPlaced == 0)) {
-		for (i = 0; i < buf1.length; i ++) {
-			if (buf1[i] === TILE.CHAR.SPACE) {
+		for (i = 0; i < output.length; i ++) {
+			if (output[i] === TILE.CHAR.SPACE) {
 				let val = Math.floor(Math.random() * 20);
 				switch (val) {
 					case 0:
 						if (! playerPlaced) {
-							buf2 += TILE.CHAR.PLAYER;
+							console.log('Placing player spawning point ...');
+							buff += TILE.CHAR.PLAYER;
 							playerPlaced = true;
 						}
 						else {
-							buf2 += buf1[i];
+							buff += output[i];
 						}
 						break;
 					case 1:
 						if (! bossPlaced) {
-							buf2 += TILE.CHAR.BOSS;
+							console.log('Placing boss ...');
+							buff += TILE.CHAR.BOSS;
 							bossPlaced = true;
 						}
 						else {
-							buf2 += buf1[i];
+							buff += output[i];
 						}
 						break;
 					case 2:
 					case 3:
 						if (questsPlaced < 3) {
-							buf2 += TILE.CHAR.QUEST;
+							console.log('Placing quest ...');
+							buff += TILE.CHAR.QUEST;
 							questsPlaced ++;
 						}
 						else {
-							buf2 += buf1[i];
+							buff += output[i];
 						}
 						break;
 					case 4:
 					case 5:
 						if (goalsPlaced < questsPlaced) {
-							buf2 += TILE.CHAR.GOAL;
+							console.log('Placing goal ...');
+							buff += TILE.CHAR.GOAL;
 							goalsPlaced ++;
 						}
 						else {
-							buf2 += buf1[i];
+							buff += output[i];
 						}
 						break;
 					case 6:
 					case 7:
 					case 8:
 						if (chestsPlaced < 5) {
-							buf2 += TILE.CHAR.CHEST;
+							console.log('Placing treasure chest ...');
+							buff += TILE.CHAR.CHEST;
 							chestsPlaced ++;
 						}
 						else {
-							buf2 += buf1[i];
+							buff += output[i];
 						}
 						break;
 					default:
-						buf2 += buf1[i];
+						buff += output[i];
 				}
 			}
 			else {
-				buf2 += buf1[i];
+				buff += output[i];
 			}
 		}
-		buf1 = buf2;
-		buf2 = '';
+		output = buff;
+		buff = '';
 	}
 	console.log('Interactive Elements placed.')
 
-	output = buf1;
+	output = output;
 	console.log(output);
 	return output;
 }
