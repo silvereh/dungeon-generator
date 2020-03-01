@@ -128,6 +128,7 @@ const populateMap = (contents) => {
 			availableSpaces ++;
 		}
 	}
+	console.log('Available Slots: ', availableSpaces);
 
 	const mobMin = availableSpaces / 5;
 	const mobMax = availableSpaces / 4;
@@ -140,6 +141,7 @@ const populateMap = (contents) => {
 				mobsPlaced ++;
 			}
 		}
+		console.log('Mobs placed: ', mobsPlaced);
 	}
 
 	// place other interactive elements.
@@ -187,6 +189,7 @@ const populateMap = (contents) => {
 			}
 		}
 	}
+	console.log('Interactive Elements placed.')
 
 	console.log(output);
 	return output;
