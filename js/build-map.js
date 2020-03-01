@@ -114,7 +114,7 @@ const loadFile = (filename) => {
  * Param: contents - The content of the map, as a string.
  */
 const populateMap = (contents) => {
-	let output = contents;
+	let output = '';
 	let availableSpaces = 0;
 	let mobsPlaced      = 0;
 	let chestsPlaced    = 0;
@@ -124,10 +124,11 @@ const populateMap = (contents) => {
 	let playerPlaced    = false;
 
 	// count available spaces.
-	for (i = 0; i < output.length; i ++) {
-		if (output[i] === TILE.CHAR.SPACE) {
+	for (i = 0; i < contents.length; i ++) {
+		if (contents[i] === TILE.CHAR.SPACE) {
 			availableSpaces ++;
 		}
+		output += contents[i];
 	}
 	console.log('Available Slots: ', availableSpaces);
 
