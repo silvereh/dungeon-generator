@@ -160,6 +160,7 @@ const populateMap = (contents) => {
 
 	// place other interactive elements.
 	while ((! playerPlaced) && (! bossPlaced) && (questsPlaced == 0) && (goalsPlaced < questsPlaced) && (chestsPlaced == 0)) {
+		console.log('Placing interactive elements ...');
 		for (i = 0; i < output.length; i ++) {
 			if (output[i] === TILE.CHAR.SPACE) {
 				let val = Math.floor(Math.random() * 20);
@@ -198,7 +199,7 @@ const populateMap = (contents) => {
 		}
 		output = buff;
 		buff = '';
-		console.log('Interactive Elements placed.');
+		console.log('Interactive elements placed.');
 	}
 
 	output = output;
