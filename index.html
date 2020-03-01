@@ -24,6 +24,16 @@
 			white-space: nowrap;
 		}
 
+		.elmt {
+			background-color: transparent;
+			background-image: url('assets/rpg-pack/atlas.png');
+			background-repeat: no-repeat;
+			background-attachment: scroll;
+			display: inline-block;
+			height: 25px;
+			width: 25px;
+		}
+
 		.outside .wall {
 			background-position: -100px -100px;
 		}
@@ -39,6 +49,34 @@
 		.inside .space {
 			background-position: -175px 0px;
 		}
+
+		.player {
+			background-position: -267px -185px;
+		}
+
+		.mob {
+			background-position: -14px -472px;
+		}
+
+		.boss {
+			background-position: -315px -120px;
+		}
+
+		.chest {
+			background-position: -35px -39px;
+		}
+
+		.chest.open {
+			background-position: -3px -39px;
+		}
+
+		.quest {
+			background-position: -377px -105px;
+		}
+
+		.goal {
+			background-position: -378px -123px;
+		}
 	</style>
 </head>
 <body>
@@ -47,16 +85,60 @@
 		<option value="outside">Outside</option>
 		<option value="inside">Inside</option>
 	</select>
-	<div id="map" class="map outside">
-		<span class="tile wall"></span>
-		<span class="tile space"></span>
+	<div id="legend" class="map outside">
+		Legend:
+		<table style="text-align: center;">
+			<tr>
+				<th style="padding-bottom: 10px;">wall</th>
+				<th style="padding-bottom: 10px;">space</th>
+				<th style="padding-bottom: 10px;">player</th>
+				<th style="padding-bottom: 10px;">mob</th>
+				<th style="padding-bottom: 10px;">boss</th>
+				<th style="padding-bottom: 10px;">treasure chest closed</th>
+				<th style="padding-bottom: 10px;">treasure chest open</th>
+				<th style="padding-bottom: 10px;">quest givers</th>
+				<th style="padding-bottom: 10px;">quest objectives</th>
+			</tr>
+			<tr>
+				<td>
+					<span class="tile wall"></span>
+				</td>
+				<td>
+					<span class="tile space"></span>
+				</td>
+				<td>
+					<span class="tile space"><span class="elmt player"></span></span>
+				</td>
+				<td>
+					<span class="tile space"><span class="elmt mob"></span></span>
+				</td>
+				<td>
+					<span class="tile space"><span class="elmt boss"></span></span>
+				</td>
+				<td>
+					<span class="tile space"><span class="elmt chest"></span></span>
+				</td>
+				<td>
+					<span class="tile space"><span class="elmt chest open"></span></span>
+				</td>
+				<td>
+					<span class="tile space"><span class="elmt quest"></span></span>
+				</td>
+				<td>
+					<span class="tile space"><span class="elmt goal"></span></span>
+				</td>
+			</tr>
+		</table>
+		<div class="map outside" id="map"></div>
 	</div>
 	<script type="text/javascript" src="js/build-map.js"></script>
 	<script type="text/javascript">
 		document.getElementById('env').addEventListener('change', e => {
 			let env = 'map ' 
 			+ e.target.value;
+			let legend = document.getElementById('legend');
 			let map = document.getElementById('map');
+			legend.className = env;
 			map.className = env;
 		});
 	</script>

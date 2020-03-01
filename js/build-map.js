@@ -43,32 +43,32 @@ const displayContents = (contents) => {
 				case TILE.CHAR.SPACE:
 					break;
 				case TILE.CHAR.PLAYER:
-					interactiveElmtClass.value = 'tile ' + TILE.CLASS.PLAYER;
+					interactiveElmtClass.value = 'elmt ' + TILE.CLASS.PLAYER;
 					interactiveElmt.setAttributeNode(interactiveElmtClass);
 					tile.appendChild(interactiveElmt);
 					break;
 				case TILE.CHAR.MOB:
-					interactiveElmtClass.value = 'tile ' + TILE.CLASS.MOB;
+					interactiveElmtClass.value = 'elmt ' + TILE.CLASS.MOB;
 					interactiveElmt.setAttributeNode(interactiveElmtClass);
 					tile.appendChild(interactiveElmt);
 					break;
 				case TILE.CHAR.BOSS:
-					interactiveElmtClass.value = 'tile ' + TILE.CLASS.BOSS;
+					interactiveElmtClass.value = 'elmt ' + TILE.CLASS.BOSS;
 					interactiveElmt.setAttributeNode(interactiveElmtClass);
 					tile.appendChild(interactiveElmt);
 					break;
 				case TILE.CHAR.CHEST:
-					interactiveElmtClass.value = 'tile ' + TILE.CLASS.CHEST;
+					interactiveElmtClass.value = 'elmt ' + TILE.CLASS.CHEST;
 					interactiveElmt.setAttributeNode(interactiveElmtClass);
 					tile.appendChild(interactiveElmt);
 					break;
 				case TILE.CHAR.QUEST:
-					interactiveElmtClass.value = 'tile ' + TILE.CLASS.QUEST;
+					interactiveElmtClass.value = 'elmt ' + TILE.CLASS.QUEST;
 					interactiveElmt.setAttributeNode(interactiveElmtClass);
 					tile.appendChild(interactiveElmt);
 					break;
 				case TILE.CHAR.GOAL:
-					interactiveElmtClass.value = 'tile ' + TILE.CLASS.GOAL;
+					interactiveElmtClass.value = 'elmt ' + TILE.CLASS.GOAL;
 					interactiveElmt.setAttributeNode(interactiveElmtClass);
 					tile.appendChild(interactiveElmt);
 					break;
