@@ -159,32 +159,32 @@ const populateMap = (contents) => {
 	}
 
 	// place other interactive elements.
-	while ((! playerPlaced) && (! bossPlaced) && (questsPlaced == 0) && (goalsPlaced < questsPlaced) && (chestsPlaced == 0)) {
+	while ((! playerPlaced) || (! bossPlaced) || (questsPlaced < 1) || (goalsPlaced < questsPlaced) || (chestsPlaced < 1)) {
 		console.log('Placing interactive elements ...');
 		for (i = 0; i < output.length; i ++) {
 			if (output[i] === TILE.CHAR.SPACE) {
 				let val = Math.floor(Math.random() * 20);
-				if (val == 0 && ! playerPlaced) {
+				if (val < 1 && ! playerPlaced) {
 					console.log('Placing player spawning point ...');
 					buff += TILE.CHAR.PLAYER;
 					playerPlaced = true;
 				}
-				else if (val == 1 && ! bossPlaced) {
+				else if (val < 2 && ! bossPlaced) {
 					console.log('Placing boss ...');
 					buff += TILE.CHAR.BOSS;
 					bossPlaced = true;
 				}
-				else if ((val == 2 || val == 3) && questsPlaced < 3) {
+				else if (val < 4 && questsPlaced < 3) {
 					console.log('Placing quest ...');
 					buff += TILE.CHAR.QUEST;
 					questsPlaced ++;
 				}
-				else if ((val == 4 || val == 5) && goalsPlaced < questsPlaced) {
+				else if (val < 6 && goalsPlaced < questsPlaced) {
 					console.log('Placing goal ...');
 					buff += TILE.CHAR.GOAL;
 					goalsPlaced ++;
 				}
-				else if ((val == 6 || val == 7 || val == 8) && chestsPlaced < 10) {
+				else if (val < 9 && chestsPlaced < 10) {
 					console.log('Placing treasure chest ...');
 					buff += TILE.CHAR.CHEST;
 					chestsPlaced ++;
