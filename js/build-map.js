@@ -98,9 +98,13 @@ const loadFile = (filename) => {
 			return;
 		}
 		// Examine the text in the response
-		response.text().then((data) => {
-			displayContents(data);
-		});
+		response.text()
+			.then((data) => {
+				populateMap(data);
+			})
+			.then((data) => {
+				displayContents(data);
+			});
 	})
 	.catch((err) => {
 		console.log('Fetch Error :-S', err);
@@ -185,6 +189,8 @@ const populateMap = (contents) => {
 			}
 		}
 	}
+
+	return contents;
 }
 
 (() => {
