@@ -228,8 +228,8 @@ const populateMap = (contents) => {
 		}
 		output = buff;
 		buff = '';
+		console.log('Interactive Elements placed.');
 	}
-	console.log('Interactive Elements placed.')
 
 	output = output;
 	console.log(output);
