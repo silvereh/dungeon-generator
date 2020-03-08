@@ -26,7 +26,7 @@
 
 		.elmt {
 			background-color: transparent;
-			background-image: url('assets/rpg-pack/atlas.png');
+			background-image: url('assets/atlas.png');
 			background-repeat: no-repeat;
 			background-attachment: scroll;
 			display: inline-block;
@@ -81,10 +81,22 @@
 </head>
 <body>
 	<h1>Dungeon Generator</h1>
+	<label for="env">Environment type:</label>
 	<select name="env" id="env">
-		<option value="outside">Outside</option>
+		<option value="outside" selected>Outside</option>
 		<option value="inside">Inside</option>
 	</select>
+	<label for="ratiobase">Base rate for placing interactive elements:</label>
+	<select name="ratiobase" id="ratiobase">
+		<option value="20" selected>20</option>
+		<option value="40">40</option>
+		<option value="60">60</option>
+		<option value="80">80</option>
+		<option value="100">100</option>
+	</select>
+	<label for="score">Map score:</label>
+	<input type="text" name="score" id="score" read-only />
+	<a id="download" href="#" type="button">Download Map</a>
 	<div id="legend" class="map outside">
 		Legend:
 		<table style="text-align: center;">
