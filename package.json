@@ -1,0 +1,31 @@
+{
+  "name": "dungeon-generator",
+  "version": "1.0.0",
+  "description": "A program to generate a map for a role playing game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silvereh/dungeon-generator.git"
+  },
+  "keywords": [
+    "rpg",
+    "dungeon",
+    "generator"
+  ],
+  "author": "Silvere Heraudeau",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/silvereh/dungeon-generator/issues"
+  },
+  "homepage": "https://github.com/silvereh/dungeon-generator#readme",
+  "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-rename": "^2.0.0",
+    "gulp-uglifyes": "^0.2.1"
+  }
+}
