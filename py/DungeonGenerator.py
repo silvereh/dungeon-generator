@@ -25,18 +25,18 @@ MAP_SIZE = {
 }
 
 MAP_DIM_X = {
-	'sm': 50,
-	'md': 75,
+	'sm': 51,
+	'md': 76,
 	'lg': 100
 }
 MAP_DIM_Y = {
-	'sm': 50,
-	'md': 75,
+	'sm': 51,
+	'md': 76,
 	'lg': 100
 }
 
 MAX_ROOM_NUMBER = {
-	'sm': 10,
+	'sm': 11,
 	'md': 16,
 	'lg': 24
 }
@@ -121,13 +121,13 @@ class Map(object):
 				for i in xrange(h.pointA.y - 1, h.pointB.y + 1):
 					idx = (i * self.width) + h.pointA.x
 					# self._map[idx] = chr(ord('A')+l)
-					self._map[idx] = '·'
-					# self._map[idx] = '-'
+					# self._map[idx] = '·'
+					self._map[idx] = '.'
 			else:
 				for i in xrange(h.pointA.x - 1, h.pointB.x + 1):
 					# self._map[i + (h.pointA.y * self.width)] = chr(ord('A')+l)
-					self._map[i + (h.pointA.y * self.width)] = '·'
-					# self._map[i + (h.pointA.y * self.width)] = '-'
+					# self._map[i + (h.pointA.y * self.width)] = '·'
+					self._map[i + (h.pointA.y * self.width)] = '.'
 
 	def isRoomIntersectingAnotherRoom(self, index):
 		roomNum = len(self.rooms)
@@ -262,8 +262,8 @@ if __name__ == '__main__':
 	maxRoomY = MAX_ROOM_Y.get(mapSize, 8)
 	ROOM_DIMS = DimRange(minRoomX, minRoomY, maxRoomX, maxRoomY)
 
-	mapX = MAP_DIM_X.get(mapSize, 50)
-	mapY = MAP_DIM_Y.get(mapSize, 50)
+	mapX = MAP_DIM_X.get(mapSize, 51)
+	mapY = MAP_DIM_Y.get(mapSize, 51)
 
 	roomNumMin = MAX_ROOM_NUMBER.get(mapSize, 10) - 2
 	roomNumMax = MAX_ROOM_NUMBER.get(mapSize, 10) + 2

@@ -1,7 +1,7 @@
 const gulp        = require('gulp'),
 			rename      = require('gulp-rename'),
 			del         = require('del'),
-			uglify      = require('gulp-uglifyes'),
+			uglify      = require('gulp-terser'),
 			browserSync = require('browser-sync').create();
 
 const PATHS = {

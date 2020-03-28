@@ -28,7 +28,7 @@ class Door(object):
 class Room(object):
 	# def __init__(self, map, minMaxRange, index=0, char='a'):
 	# def __init__(self, map, minMaxRange, index=0, char='·'):
-	def __init__(self, map, minMaxRange, index=0, char='-'):
+	def __init__(self, map, minMaxRange, index=0, char='.'):
 		#far left of room - should always be the max range away from the outer wall
 		x1 = random.randrange(1, (map.width - minMaxRange.max.x))
 		#upper wall of room - same as above.
