@@ -10,7 +10,7 @@ const TILE = {
 		GOAL       : 'goal'
 	},
 	CHAR       : {
-		WALL       : '0',
+		WALL       : ' ',
 		SPACE      : '.',
 		PLAYER     : 'P',
 		MOB        : 'm',
@@ -22,25 +22,15 @@ const TILE = {
 }
 const MAP = {
 	LENGTH    : {
-		SM : 2852,
-		MD : 5852,
-		LG : 10100
-	},
-	SIZE      : {
-		SM : 51,
-		MD : 76,
-		LG : 100
+		SM : 52,
+		MD : 77,
+		LG : 101
 	},
 	SUBNUM    : {
 		SM : 3,
 		MD : 4,
 		LG : 5
 	},
-	SUBSIZE   : {
-		SM : 17,
-		MD : 19,
-		LG : 20
-	}
 }
 
 /**
@@ -125,23 +115,40 @@ const getMapObject = (contents) => {
 		console.log('no map entered')
 		return null;
 	}
+	let mapArr = contents.split('\n');
+	console.log('mapArr: ', mapArr);
+	let mapWidth = mapArr[0].length;
+	let mapHeight = mapArr.length;
 
-	let mapSize = MAP.SIZE.SM;
-	let subsize = MAP.SUBSIZE.SM;
-	let submapnum = Math.pow(MAP.SUBNUM.SM, 2);
+	let submapNumWidth = MAP.SUBNUM.SM;
+	let submapNumHeight = MAP.SUBNUM.SM;
+	let submapHeight = Math.ceil(mapHeight / submapNumHeight);
+	let submapWidth = Math.ceil(mapWidth / submapNumWidth);
+
+	if (mapWidth > MAP.LENGTH.SM) {
+		submapNumWidth = MAP.SUBNUM.MD;
+	}
+	if (mapWidth > MAP.LENGTH.MD) {
+		submapNumWidth = MAP.SUBNUM.LG;
+	}
+	if (mapHeight > MAP.LENGTH.SM) {
+		submapNumHeight = MAP.SUBNUM.MD;
+	}
+	if (mapHeight > MAP.LENGTH.MD) {
+		submapNumHeight = MAP.SUBNUM.LG;
+	}
+
 	let submaps = [];
-	if (contents.length > MAP.LENGTH.SM) {
-		mapSize = MAP.SIZE.MD;
-		subsize = MAP.SUBSIZE.MD;
-		submapnum = Math.pow(MAP.SUBNUM.MD, 2);
-	}
-	if (contents.length > MAP.LENGTH.MD) {
-		mapSize = MAP.SIZE.LG;
-		subsize = MAP.SUBSIZE.LG;
-		submapnum = Math.pow(MAP.SUBNUM.LG, 2);
-	}
-	for (let i = 0; i < submapnum; i ++) {
-		submaps.push('');
+	for (let i = 0; i < submapNumWidth; i ++) {
+		for (let j = 0; j < submapNumHeight; j ++) {
+			submaps.push({
+				xmin : i == 0 ? 0 : i * submapWidth + 1,
+				xmax : (i + 1) * submapWidth,
+				ymin : j == 0 ? 0 : j * submapHeight + 1,
+				ymax : (j + 1) * submapHeight,
+				contents : ''
+			});
+		}
 	}
 
 	let buff = '';
@@ -154,8 +161,8 @@ const getMapObject = (contents) => {
 		output += contents[i];
 	}
 
-	const mobsMin = availableSpaces / 5;
-	const mobsMax = availableSpaces / 4;
+	const mobsMin = Math.floor(availableSpaces / 5);
+	const mobsMax = Math.floor(availableSpaces / 4);
 
 	let mobrate = parseInt(document.getElementById('mobrate').value);
 	if (mobrate <= 0) {
@@ -194,26 +201,28 @@ const getMapObject = (contents) => {
 	}
 
 	let map = {
-		contents    : output,
-		size        : mapSize,
-		subsize     : subsize,
-		emptySpaces : availableSpaces,
-		mobsMin     : mobsMin,
-		mobsMax     : mobsMax,
-		mobrate     : mobrate,
-		playerrate  : playerrate,
-		bossrate    : bossrate,
-		questrate   : questrate,
-		goalrate    : goalrate,
-		chestrate   : chestrate,
-		successrate : successrate,
-		mobs        : [],
-		quests      : [],
-		goals       : [],
-		chests      : [],
-		submaps     : submaps,
-		player      : null,
-		boss        : null,
+		contents     : output,
+		height       : mapHeight,
+		width        : mapWidth,
+		submapHeight : submapHeight,
+		submapWidth  : submapWidth,
+		emptySpaces  : availableSpaces,
+		mobsMin      : mobsMin,
+		mobsMax      : mobsMax,
+		mobrate      : mobrate,
+		playerrate   : playerrate,
+		bossrate     : bossrate,
+		questrate    : questrate,
+		goalrate     : goalrate,
+		chestrate    : chestrate,
+		successrate  : successrate,
+		mobs         : [],
+		quests       : [],
+		goals        : [],
+		chests       : [],
+		submaps      : submaps,
+		player       : null,
+		boss         : null,
 	};
 
 	return map;
@@ -282,7 +291,7 @@ const populateMobs = (map) => {
 			}
 			if (output[i] != '\n') {
 				x ++;
-				if (x >= map.size) {
+				if (x >= map.width) {
 					x = 0;
 					y ++;
 				}
@@ -398,7 +407,7 @@ const populateOthers = (map) => {
 			}
 			if (output[i] != '\n') {
 				x ++;
-				if (x >= map.size) {
+				if (x >= map.width) {
 					x = 0;
 					y ++;
 				}
@@ -448,187 +457,13 @@ const divideMap = (map) => {
 
 	for (let i = 0; i < map.contents.length; i ++) {
 		if (map.contents[i] != '\n') {
-			if (map.submaps.length == 9) {
-				if (y < map.subsize) {
-					if (x < map.subsize) {
-						map.submaps[0] += map.contents[i];
-					}
-					if (x < map.subsize * 2) {
-						map.submaps[1] += map.contents[i];
-					}
-					if (x < map.subsize * 3) {
-						map.submaps[2] += map.contents[i];
-					}
-				}
-				else if (y < map.subsize * 2) {
-					if (x < map.subsize) {
-						map.submaps[3] += map.contents[i];
-					}
-					if (x < map.subsize * 2) {
-						map.submaps[4] += map.contents[i];
-					}
-					if (x < map.subsize * 3) {
-						map.submaps[5] += map.contents[i];
-					}
-				}
-				else if (y < map.subsize * 3) {
-					if (x < map.subsize) {
-						map.submaps[6] += map.contents[i];
-					}
-					if (x < map.subsize * 2) {
-						map.submaps[7] += map.contents[i];
-					}
-					if (x < map.subsize * 3) {
-						map.submaps[8] += map.contents[i];
-					}
+			for (let j = 0; j < map.submaps.length; j ++) {
+				if (x <= map.submaps[j].xmax && x >= map.submaps[j].xmin &&
+						y <= map.submaps[j].ymax && y >= map.submaps[j].ymin) {
+					map.submaps[j].contents += map.contents[i];
 				}
 			}
-			else if (map.submaps.length == 16) {
-				if (y < map.subsize) {
-					if (x < map.subsize) {
-						map.submaps[0] += map.contents[i];
-					}
-					if (x < map.subsize * 2) {
-						map.submaps[1] += map.contents[i];
-					}
-					if (x < map.subsize * 3) {
-						map.submaps[2] += map.contents[i];
-					}
-					if (x < map.subsize * 4) {
-						map.submaps[3] += map.contents[i];
-					}
-				}
-				else if (y < map.subsize * 2) {
-					if (x < map.subsize) {
-						map.submaps[4] += map.contents[i];
-					}
-					if (x < map.subsize * 2) {
-						map.submaps[5] += map.contents[i];
-					}
-					if (x < map.subsize * 3) {
-						map.submaps[6] += map.contents[i];
-					}
-					if (x < map.subsize * 4) {
-						map.submaps[7] += map.contents[i];
-					}
-				}
-				else if (y < map.subsize * 3) {
-					if (x < map.subsize) {
-						map.submaps[8] += map.contents[i];
-					}
-					if (x < map.subsize * 2) {
-						map.submaps[9] += map.contents[i];
-					}
-					if (x < map.subsize * 3) {
-						map.submaps[10] += map.contents[i];
-					}
-					if (x < map.subsize * 4) {
-						map.submaps[11] += map.contents[i];
-					}
-				}
-				else if (y < map.subsize * 4) {
-					if (x < map.subsize) {
-						map.submaps[12] += map.contents[i];
-					}
-					if (x < map.subsize * 2) {
-						map.submaps[13] += map.contents[i];
-					}
-					if (x < map.subsize * 3) {
-						map.submaps[14] += map.contents[i];
-					}
-					if (x < map.subsize * 4) {
-						map.submaps[15] += map.contents[i];
-					}
-				}
-			}
-			else if (map.submaps.length == 25) {
-				if (y < map.subsize) {
-					if (x < map.subsize) {
-						map.submaps[0] += map.contents[i];
-					}
-					if (x < map.subsize * 2) {
-						map.submaps[1] += map.contents[i];
-					}
-					if (x < map.subsize * 3) {
-						map.submaps[2] += map.contents[i];
-					}
-					if (x < map.subsize * 4) {
-						map.submaps[3] += map.contents[i];
-					}
-					if (x < map.subsize * 5) {
-						map.submaps[4] += map.contents[i];
-					}
-				}
-				else if (y < map.subsize * 2) {
-					if (x < map.subsize) {
-						map.submaps[5] += map.contents[i];
-					}
-					if (x < map.subsize * 2) {
-						map.submaps[6] += map.contents[i];
-					}
-					if (x < map.subsize * 3) {
-						map.submaps[7] += map.contents[i];
-					}
-					if (x < map.subsize * 4) {
-						map.submaps[8] += map.contents[i];
-					}
-					if (x < map.subsize * 5) {
-						map.submaps[9] += map.contents[i];
-					}
-				}
-				else if (y < map.subsize * 3) {
-					if (x < map.subsize) {
-						map.submaps[10] += map.contents[i];
-					}
-					if (x < map.subsize * 2) {
-						map.submaps[11] += map.contents[i];
-					}
-					if (x < map.subsize * 3) {
-						map.submaps[12] += map.contents[i];
-					}
-					if (x < map.subsize * 4) {
-						map.submaps[13] += map.contents[i];
-					}
-					if (x < map.subsize * 5) {
-						map.submaps[14] += map.contents[i];
-					}
-				}
-				else if (y < map.subsize * 4) {
-					if (x < map.subsize) {
-						map.submaps[15] += map.contents[i];
-					}
-					if (x < map.subsize * 2) {
-						map.submaps[16] += map.contents[i];
-					}
-					if (x < map.subsize * 3) {
-						map.submaps[17] += map.contents[i];
-					}
-					if (x < map.subsize * 4) {
-						map.submaps[18] += map.contents[i];
-					}
-					if (x < map.subsize * 5) {
-						map.submaps[19] += map.contents[i];
-					}
-				}
-				else if (y < map.subsize * 5) {
-					if (x < map.subsize) {
-						map.submaps[20] += map.contents[i];
-					}
-					if (x < map.subsize * 2) {
-						map.submaps[21] += map.contents[i];
-					}
-					if (x < map.subsize * 3) {
-						map.submaps[22] += map.contents[i];
-					}
-					if (x < map.subsize * 4) {
-						map.submaps[23] += map.contents[i];
-					}
-					if (x < map.subsize * 5) {
-						map.submaps[24] += map.contents[i];
-					}
-				}
-			}
-			if (x < map.size) {
+			if (x < map.width) {
 				x ++;
 			}
 			else {
@@ -678,30 +513,30 @@ const evalDistPlayerBoss = (map) => {
 	console.log('boss coord: \n x: ', map.boss.x, '\n y: ', map.boss.y);
 	let distance = Math.sqrt(Math.pow(Math.abs(map.boss.x - map.player.x), 2) + Math.pow(Math.abs(map.boss.y - map.player.y), 2));
 	console.log('distance: ', distance);
-	console.log('map size: ', map.size);
+	console.log('map size: ', map.width);
 	let score = 0;
-	if (distance < map.size / 2) {
+	if (distance < map.width / 2) {
 		score = 0;
 	}
-	else if (distance < map.size * 2 / 3) {
+	else if (distance < map.width * 2 / 3) {
 		score = 1;
 	}
-	else if (distance < map.size * 3 / 4) {
+	else if (distance < map.width * 3 / 4) {
 		score = 2;
 	}
-	else if (distance < map.size * 4 / 5) {
+	else if (distance < map.width * 4 / 5) {
 		score = 3;
 	}
-	else if (distance < map.size * 6 / 5) {
+	else if (distance < map.width * 6 / 5) {
 		score = 4;
 	}
-	else if (distance < map.size * 5 / 4) {
+	else if (distance < map.width * 5 / 4) {
 		score = 3;
 	}
-	else if (distance < map.size * 4 / 3) {
+	else if (distance < map.width * 4 / 3) {
 		score = 2;
 	}
-	else if (distance < map.size * 3 / 2) {
+	else if (distance < map.width * 3 / 2) {
 		score = 1;
 	}
 
@@ -717,7 +552,7 @@ const evalQuestsSpread = (map) => {
 	let maxQuest = 0;
 	let buff = 0;
 	for (let i = 0; i < map.submaps.length; i ++) {
-		for (let j = 0; j < map.submaps[i].length; j ++) {
+		for (let j = 0; j < map.submaps[i].contents.length; j ++) {
 			if (map.submaps[i][j] == TILE.CHAR.QUEST || map.submaps[i][j] == TILE.CHAR.GOAL) {
 				buff ++;
 			}
@@ -752,7 +587,7 @@ const evalTreasureSpread = (map) => {
 	let maxChest = 0;
 	let buff = 0;
 	for (let i = 0; i < map.submaps.length; i ++) {
-		for (let j = 0; j < map.submaps[i].length; j ++) {
+		for (let j = 0; j < map.submaps[i].contents.length; j ++) {
 			if (map.submaps[i][j] == TILE.CHAR.CHEST) {
 				buff ++;
 			}
@@ -788,7 +623,7 @@ const evalMobsSpread = (map) => {
 	let minMob = 1000;
 	let buff = 0;
 	for (let i = 0; i < map.submaps.length; i ++) {
-		for (let j = 0; j < map.submaps[i].length; j ++) {
+		for (let j = 0; j < map.submaps[i].contents.length; j ++) {
 			if (map.submaps[i][j] == TILE.CHAR.MOB) {
 				buff ++;
 			}
@@ -802,19 +637,62 @@ const evalMobsSpread = (map) => {
 	}
 
 	let score = 0;
-	if (maxMob - minMob < 2) {
+	if (maxMob - minMob < 10) {
 		score = 4;
 	}
-	else if (maxMob - minMob < 4) {
+	else if (maxMob - minMob < 20) {
 		score = 3;
 	}
-	else if (maxMob - minMob < 6) {
+	else if (maxMob - minMob < 30) {
 		score = 2;
 	}
-	else if (maxMob - minMob < 8) {
+	else if (maxMob - minMob < 40) {
 		score = 1;
 	}
 	return score;
+}
+
+/**
+ * Trim outer walls to improve map scoring.
+ * Param: contents - The content of the map, as a string.
+ * Param: map - The map object.
+ */
+const trimOuterWalls = (contents) => {
+	let mapArr = contents.split('\n');
+	console.log('mapArr: ', mapArr);
+	let mapArrR = [];
+	for (let k = 0; k < mapArr.length; k ++) {
+		mapArrR.push('');
+	}
+	for (let i = 0; i < mapArr.length; i ++) {
+		console.log('line empty: ', mapArr[i].trim() == '');
+		if (mapArr[i].trim() != '') {
+			for (let j = 0; j < mapArr[i].length; j++) {
+				mapArrR[j] += mapArr[i][j];
+			}
+		}
+	}
+	let outputArr = [];
+	for (let o = 0; o < mapArrR[0].length; o ++) {
+		outputArr.push('');
+	}
+	console.log('mapArrR: ', mapArrR);
+	for (let m = 0; m < mapArrR.length; m ++) {
+		console.log('line empty: ', mapArrR[m].trim() == '');
+		if (mapArrR[m].trim() != '') {
+			for (let l = 0; l < mapArrR[m].length; l ++) {
+				outputArr[l] += mapArrR[m][l];
+			}
+		}
+	}
+	console.log('outputArr: ', outputArr);
+	let outputStr = '';
+	for (let n = 0; n < outputArr.length; n ++) {
+		outputStr += outputArr[n];
+		outputStr += '\n';
+	}
+	console.log('outputStr: ', outputStr);
+	return outputStr;
 }
 
 /**
@@ -836,7 +714,7 @@ const loadFile = (filename) => {
 		// Examine the text in the response
 		response.text()
 			.then((data) => {
-				let map = getMapObject(data);
+				let map = getMapObject(trimOuterWalls(data));
 				populateMap(map);
 				downloadMap(map);
 				displayContents(map);

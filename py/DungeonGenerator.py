@@ -25,20 +25,20 @@ MAP_SIZE = {
 }
 
 MAP_DIM_X = {
-	'sm': 51,
-	'md': 76,
-	'lg': 100
+	'sm': 52,
+	'md': 77,
+	'lg': 101
 }
 MAP_DIM_Y = {
-	'sm': 51,
-	'md': 76,
-	'lg': 100
+	'sm': 52,
+	'md': 77,
+	'lg': 101
 }
 
 MAX_ROOM_NUMBER = {
-	'sm': 11,
-	'md': 16,
-	'lg': 24
+	'sm': 16,
+	'md': 20,
+	'lg': 30
 }
 MAX_DIST_FOR_HALLWAYS = {
 	'sm': 40,
@@ -81,7 +81,7 @@ class Map(object):
 		#iterate over the map and fill it with wall tiles
 		# self._map = ["-" for i in xrange(0, width * height)] 
 		# self._map = ["◊" for i in xrange(0, width * height)] 
-		self._map = ["0" for i in xrange(0, width * height)] 
+		self._map = [" " for i in xrange(0, width * height)] 
 
 		self.mapSize = mapSize
 

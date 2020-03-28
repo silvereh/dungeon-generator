@@ -40,7 +40,8 @@ const clean = () => {
 const watch = () => {
 	browserSync.init({
 		server: {
-			baseDir: '.'
+			baseDir: '.',
+			open: false
 		}
 	});
 
